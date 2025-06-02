@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>DocList</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			max-width: 600px;
+			margin: auto;
+		}
+
+		.locked {
+			color: red;
+		}
+
+		.unlocked {
+			color: green;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Files</h1>
+	<form action="/create" method="post">
+		<input name="filename" placeholder="new file name" required />
+		<button type="submit">Create</button>
+	</form>
+	<ul>
+		{% for f in files %}
+		<li>
+			{{ f }} —
+			{% if states[f] %}
+			<span class="locked">🔒 Locked by {{ states[f] }}</span>
+			{% else %}
+			<form action="/edit/{{ f }}" method="get" style="display:inline">
+				<button>Edit</button>
+			</form>
+			<form action="/delete/{{ f }}" method="post" style="display:inline">
+				<button>Delete</button>
+			</form>
+			{% endif %}
+		</li>
+		{% endfor %}
+	</ul>
+</body>
+
+</html>

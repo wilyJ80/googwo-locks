@@ -10,7 +10,7 @@ os.makedirs(FILE_DIR, exist_ok=True)
 
 # Always create a new proxy per request
 def get_doc_manager():
-    return Proxy("PYRO:docmanager@localhost:9090")
+    return Proxy("PYRO:docmanager@0.0.0.0:9090")
 
 
 @app.route("/")
@@ -64,4 +64,4 @@ def delete(filename):
 
 
 if __name__ == "__main__":
-    app.run(port=8000, debug=True)
+    app.run(port=8000, debug=True, host="0.0.0.0")

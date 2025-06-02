@@ -28,7 +28,7 @@ class DocManager:
 
 
 if __name__ == "__main__":
-    daemon = Daemon(host="localhost", port=9090)
+    daemon = Daemon(host="0.0.0.0", port=9090)
     uri = daemon.register(DocManager(), "docmanager")
     print("Pyro server running at:", uri)
     daemon.requestLoop()

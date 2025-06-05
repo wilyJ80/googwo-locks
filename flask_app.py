@@ -49,10 +49,14 @@ def edit(filename):
             return render_template("edit.html", filename=filename, content=content)
 
         else:
+            action = request.form.get("action")
             with open(path, "w") as f:
                 f.write(request.form.get("content", ""))
-            doc_manager.release_lock(filename, ip)
-            return redirect(url_for("index"))
+            if action == "save_release":
+                doc_manager.release_lock(filename, ip)
+                return redirect(url_for("index"))
+            else:
+                return redirect(url_for("edit", filename=filename))
 
 
 @app.route("/view/<filename>")

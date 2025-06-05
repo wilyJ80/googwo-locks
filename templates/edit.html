@@ -10,10 +10,7 @@
 	<h1>Editing {{ filename }}</h1>
 	<form method="post">
 		<textarea name="content" style="width:100%;height:300px;">{{ content }}</textarea><br>
-		<button type="submit">Save</button>
-	</form>
-	<form method="post" action="/release/{{ filename }}">
-		<button type="submit">Release Lock</button>
+		<button type="submit">Save and Release</button>
 	</form>
 	<p><a href="/">Back to list</a></p>
 </body>

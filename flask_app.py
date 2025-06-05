@@ -25,9 +25,12 @@ def index():
 
 @app.route("/create", methods=["POST"])
 def create():
-    filename = request.form["filename"]
+    filename = request.form["filename"].strip()
+    if not filename:
+        return redirect(url_for("index"))
     path = os.path.join(FILE_DIR, filename)
-    open(path, "w").close()
+    if not os.path.exists(path):
+        open(path, "w").close()
     return redirect(url_for("index"))
 
 
@@ -35,32 +38,23 @@ def create():
 def edit(filename):
     ip = request.remote_addr
     path = os.path.join(FILE_DIR, filename)
+    if not os.path.exists(path):
+        return "File not found", 404
+
     with get_doc_manager() as doc_manager:
-        if request.method == "POST":
-            if doc_manager.request_lock(filename, ip):
-                with open(path, "w") as f:
-                    f.write(request.form["content"])
+        if request.method == "GET":
+            # Try to grab the lock; if it fails, tell the user
+            if not doc_manager.request_lock(filename, ip):
+                return "File is locked by another user.", 403
+            with open(path) as f:
+                content = f.read()
+            return render_template("edit.html", filename=filename, content=content)
+        else:  # POST
+            # Assume lock is already held by this IP
+            with open(path, "w") as f:
+                f.write(request.form.get("content", ""))
+            doc_manager.release_lock(filename, ip)
             return redirect(url_for("index"))
-        if not doc_manager.request_lock(filename, ip):
-            return "File is locked by another user.", 403
-    with open(path) as f:
-        content = f.read()
-    return render_template("edit.html", filename=filename, content=content)
-
-
-@app.route("/release/<filename>", methods=["POST"])
-def release(filename):
-    ip = request.remote_addr
-    with get_doc_manager() as doc_manager:
-        doc_manager.release_lock(filename, ip)
-    return redirect(url_for("index"))
-
-
-@app.route("/delete/<filename>", methods=["POST"])
-def delete(filename):
-    path = os.path.join(FILE_DIR, filename)
-    os.remove(path)
-    return redirect(url_for("index"))
 
 
 if __name__ == "__main__":

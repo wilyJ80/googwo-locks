@@ -45,7 +45,8 @@ def edit(filename):
         if request.method == "GET":
             # Try to grab the lock; if it fails, tell the user
             if not doc_manager.request_lock(filename, ip):
-                return "File is locked by another user.", 403
+                # return "File is locked by another user.", 403
+                return render_template("locked.html")
             with open(path) as f:
                 content = f.read()
             return render_template("edit.html", filename=filename, content=content)

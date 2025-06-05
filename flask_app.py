@@ -37,7 +37,7 @@ def edit(filename):
     ip = request.remote_addr
     path = os.path.join(FILE_DIR, filename)
     if not os.path.exists(path):
-        return "File not found", 404
+        return render_template("file_not_found.html"), 404
 
     with get_doc_manager() as doc_manager:
         if request.method == "GET":
@@ -50,8 +50,19 @@ def edit(filename):
 
         else:
             action = request.form.get("action")
+
+            if action == "delete":
+                owner = doc_manager.get_lock_info(filename)
+                if owner == ip:
+                    os.remove(path)
+                    doc_manager.release_lock(filename, ip)
+                    return redirect(url_for("index"))
+                else:
+                    return render_template("locked.html"), 403
+
             with open(path, "w") as f:
                 f.write(request.form.get("content", ""))
+
             if action == "save_release":
                 doc_manager.release_lock(filename, ip)
                 return redirect(url_for("index"))
@@ -63,7 +74,7 @@ def edit(filename):
 def view(filename):
     path = os.path.join(FILE_DIR, filename)
     if not os.path.exists(path):
-        return "File not found", 404
+        return render_template("file_not_found.html"), 404
 
     with open(path) as f:
         content = f.read()

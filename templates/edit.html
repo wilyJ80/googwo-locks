@@ -31,6 +31,8 @@
 		<textarea name="content">{{ content }}</textarea><br>
 		<button type="submit" name="action" value="save">Save (keep lock) 💾 🔒</button>
 		<button type="submit" name="action" value="save_release">Save & Release 💾 🆓</button>
+		<button type="submit" name="action" value="delete"
+			onclick="return confirm('Are you sure you want to delete this file?');">🗑️ Delete</button>
 	</form>
 
 	<p><a href="/">Back to list</a></p>

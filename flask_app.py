@@ -1,4 +1,3 @@
-# flask_app.py
 from flask import Flask, request, render_template, redirect, url_for
 from Pyro5.api import Proxy
 import os
@@ -8,7 +7,6 @@ FILE_DIR = "files"
 os.makedirs(FILE_DIR, exist_ok=True)
 
 
-# Always create a new proxy per request
 def get_doc_manager():
     return Proxy("PYRO:docmanager@0.0.0.0:9090")
 
@@ -43,15 +41,12 @@ def edit(filename):
 
     with get_doc_manager() as doc_manager:
         if request.method == "GET":
-            # Try to grab the lock; if it fails, tell the user
             if not doc_manager.request_lock(filename, ip):
-                # return "File is locked by another user.", 403
                 return render_template("locked.html")
             with open(path) as f:
                 content = f.read()
             return render_template("edit.html", filename=filename, content=content)
-        else:  # POST
-            # Assume lock is already held by this IP
+        else:
             with open(path, "w") as f:
                 f.write(request.form.get("content", ""))
             doc_manager.release_lock(filename, ip)

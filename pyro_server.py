@@ -1,4 +1,3 @@
-# pyro_server.py
 from Pyro5.api import expose, Daemon
 from collections import defaultdict
 import threading

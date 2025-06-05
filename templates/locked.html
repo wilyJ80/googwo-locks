@@ -2,16 +2,38 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Locked</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			max-width: 600px;
+			margin: auto;
+			text-align: center;
+		}
+
+		.locked-msg {
+			margin-top: 50px;
+			color: red;
+			font-size: 1.2em;
+		}
+
+		a {
+			display: inline-block;
+			margin-top: 20px;
+			text-decoration: none;
+			color: blue;
+		}
+	</style>
 </head>
 
 <body>
-
-	<h1>File is locked by another user</h1>
-	<a href="/">Back to index</a>
-
+	<div class="locked-msg">
+		<h1>File is claimed right now</h1>
+		<p>Another user currently holds the edit lock.</p>
+		<a href="/">Back to index</a>
+	</div>
 </body>
 
 </html>

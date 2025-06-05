@@ -11,33 +11,51 @@
       margin: auto;
     }
 
-    .locked {
-      color: red;
+    ul {
+      list-style: none;
+      padding: 0;
     }
 
-    .unlocked {
-      color: green;
+    li {
+      margin: 8px 0;
+    }
+
+    button {
+      margin-left: 4px;
+    }
+
+    .owner {
+      font-size: 0.9em;
+      color: #555;
+      margin-left: 8px;
     }
   </style>
 </head>
 
 <body>
   <h1>Files</h1>
+
+  <a href="/">Refresh</a>
+
   <form action="/create" method="post">
     <input name="filename" placeholder="new file name" required />
     <button type="submit">Create</button>
   </form>
+
   <ul>
     {% for f in files %}
       <li>
-        {{ f }} —
+        {{ f }}
         {% if states[f] %}
-          <span class="locked">🔒 Locked by {{ states[f] }}</span>
-        {% else %}
-          <form action="/edit/{{ f }}" method="get" style="display:inline">
-            <button>Edit</button>
-          </form>
+          <span class="owner">(Owner: {{ states[f] }})</span>
         {% endif %}
+        —
+        <form action="/edit/{{ f }}" method="get" style="display:inline">
+          <button>Edit</button>
+        </form>
+        <form action="/view/{{ f }}" method="get" style="display:inline">
+          <button>View</button>
+        </form>
       </li>
     {% endfor %}
   </ul>

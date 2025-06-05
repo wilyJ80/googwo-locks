@@ -18,7 +18,7 @@ def index():
     with get_doc_manager() as doc_manager:
         for f in files:
             file_states[f] = doc_manager.get_lock_info(f)
-    return render_template("index.html", files=files, states=file_states)
+    return render_template("index.html", files=sorted(files), states=file_states)
 
 
 @app.route("/create", methods=["POST"])
@@ -37,20 +37,48 @@ def edit(filename):
     ip = request.remote_addr
     path = os.path.join(FILE_DIR, filename)
     if not os.path.exists(path):
-        return "File not found", 404
+        return render_template("file_not_found.html"), 404
 
     with get_doc_manager() as doc_manager:
         if request.method == "GET":
             if not doc_manager.request_lock(filename, ip):
-                return render_template("locked.html")
+                return render_template("locked.html"), 200
+
             with open(path) as f:
                 content = f.read()
             return render_template("edit.html", filename=filename, content=content)
+
         else:
+            action = request.form.get("action")
+
+            if action == "delete":
+                owner = doc_manager.get_lock_info(filename)
+                if owner == ip:
+                    os.remove(path)
+                    doc_manager.release_lock(filename, ip)
+                    return redirect(url_for("index"))
+                else:
+                    return render_template("locked.html"), 403
+
             with open(path, "w") as f:
                 f.write(request.form.get("content", ""))
-            doc_manager.release_lock(filename, ip)
-            return redirect(url_for("index"))
+
+            if action == "save_release":
+                doc_manager.release_lock(filename, ip)
+                return redirect(url_for("index"))
+            else:
+                return redirect(url_for("edit", filename=filename))
+
+
+@app.route("/view/<filename>")
+def view(filename):
+    path = os.path.join(FILE_DIR, filename)
+    if not os.path.exists(path):
+        return render_template("file_not_found.html"), 404
+
+    with open(path) as f:
+        content = f.read()
+    return render_template("view.html", filename=filename, content=content)
 
 
 if __name__ == "__main__":

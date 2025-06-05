@@ -18,6 +18,19 @@
     .unlocked {
       color: green;
     }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    button {
+      margin-left: 4px;
+    }
   </style>
 </head>
 
@@ -27,12 +40,16 @@
     <input name="filename" placeholder="new file name" required />
     <button type="submit">Create</button>
   </form>
+
   <ul>
     {% for f in files %}
       <li>
         {{ f }} —
         {% if states[f] %}
           <span class="locked">🔒 Locked by {{ states[f] }}</span>
+          <form action="/view/{{ f }}" method="get" style="display:inline">
+            <button>View</button>
+          </form>
         {% else %}
           <form action="/edit/{{ f }}" method="get" style="display:inline">
             <button>Edit</button>

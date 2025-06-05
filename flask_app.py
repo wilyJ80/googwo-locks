@@ -18,7 +18,7 @@ def index():
     with get_doc_manager() as doc_manager:
         for f in files:
             file_states[f] = doc_manager.get_lock_info(f)
-    return render_template("index.html", files=files, states=file_states)
+    return render_template("index.html", files=sorted(files), states=file_states)
 
 
 @app.route("/create", methods=["POST"])
@@ -42,15 +42,28 @@ def edit(filename):
     with get_doc_manager() as doc_manager:
         if request.method == "GET":
             if not doc_manager.request_lock(filename, ip):
-                return render_template("locked.html")
+                return render_template("locked.html"), 200
+
             with open(path) as f:
                 content = f.read()
             return render_template("edit.html", filename=filename, content=content)
+
         else:
             with open(path, "w") as f:
                 f.write(request.form.get("content", ""))
             doc_manager.release_lock(filename, ip)
             return redirect(url_for("index"))
+
+
+@app.route("/view/<filename>")
+def view(filename):
+    path = os.path.join(FILE_DIR, filename)
+    if not os.path.exists(path):
+        return "File not found", 404
+
+    with open(path) as f:
+        content = f.read()
+    return render_template("view.html", filename=filename, content=content)
 
 
 if __name__ == "__main__":

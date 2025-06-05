@@ -4,12 +4,26 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Editing {{ filename }}</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			max-width: 600px;
+			margin: auto;
+		}
+
+		textarea {
+			width: 100%;
+			height: 300px;
+			font-family: monospace;
+			margin-bottom: 8px;
+		}
+	</style>
 </head>
 
 <body>
 	<h1>Editing {{ filename }}</h1>
 	<form method="post">
-		<textarea name="content" style="width:100%;height:300px;">{{ content }}</textarea><br>
+		<textarea name="content">{{ content }}</textarea><br>
 		<button type="submit">Save and Release</button>
 	</form>
 	<p><a href="/">Back to list</a></p>

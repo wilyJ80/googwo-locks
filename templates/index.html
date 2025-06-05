@@ -23,6 +23,12 @@
     button {
       margin-left: 4px;
     }
+
+    .owner {
+      font-size: 0.9em;
+      color: #555;
+      margin-left: 8px;
+    }
   </style>
 </head>
 
@@ -37,7 +43,11 @@
   <ul>
     {% for f in files %}
       <li>
-        {{ f }} —
+        {{ f }}
+        {% if states[f] %}
+          <span class="owner">(Owner: {{ states[f] }})</span>
+        {% endif %}
+        —
         <form action="/edit/{{ f }}" method="get" style="display:inline">
           <button>Edit</button>
         </form>

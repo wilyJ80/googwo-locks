@@ -11,14 +11,6 @@
       margin: auto;
     }
 
-    .locked {
-      color: red;
-    }
-
-    .unlocked {
-      color: green;
-    }
-
     ul {
       list-style: none;
       padding: 0;
@@ -36,6 +28,7 @@
 
 <body>
   <h1>Files</h1>
+
   <form action="/create" method="post">
     <input name="filename" placeholder="new file name" required />
     <button type="submit">Create</button>
@@ -45,16 +38,12 @@
     {% for f in files %}
       <li>
         {{ f }} —
-        {% if states[f] %}
-          <span class="locked">🔒 Locked by {{ states[f] }}</span>
-          <form action="/view/{{ f }}" method="get" style="display:inline">
-            <button>View</button>
-          </form>
-        {% else %}
-          <form action="/edit/{{ f }}" method="get" style="display:inline">
-            <button>Edit</button>
-          </form>
-        {% endif %}
+        <form action="/edit/{{ f }}" method="get" style="display:inline">
+          <button>Edit</button>
+        </form>
+        <form action="/view/{{ f }}" method="get" style="display:inline">
+          <button>View</button>
+        </form>
       </li>
     {% endfor %}
   </ul>

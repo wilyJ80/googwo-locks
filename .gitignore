@@ -1,3 +1,5 @@
 venv
 files
 mirror_files
+app_a/__pycache__
+app_b/__pycache__

@@ -103,4 +103,4 @@ def mirror_delete(filename):
 
 
 if __name__ == "__main__":
-    app.run(port=5001)  # Change to 5001 for app_b
+    app.run(port=5001, host="0.0.0.0")  # Change to 5001 for app_b

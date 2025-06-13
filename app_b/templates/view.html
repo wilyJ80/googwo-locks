@@ -2,31 +2,25 @@
 <html>
 
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="refresh" content="1">
-	<title>Viewing {{ filename }}</title>
-	<style>
-		body {
-			font-family: sans-serif;
-			max-width: 600px;
-			margin: auto;
-		}
-
-		pre {
-			white-space: pre-wrap;
-			word-wrap: break-word;
-			background: #f7f7f7;
-			padding: 12px;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-		}
-	</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="1">
+    <title>Viewing {{ filename }}</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="mystyle.css">
+    <style>
+        /* Pequeno ajuste para o link "Back to list" */
+        p[style="text-align: center;"] {
+            margin-top: 30px; /* Mais espaçamento superior */
+            padding-top: 15px;
+            border-top: 1px solid #eee; /* Linha divisória */
+        }
+    </style>
 </head>
 
 <body>
-	<h1>Viewing {{ filename }}</h1>
-	<pre>{{ content }}</pre>
-	<p><a href="/">Back to list</a></p>
+    <h1>Viewing {{ filename }}</h1>
+    <pre>{{ content }}</pre>
+    <p style="text-align: center;"><a href="/">Back to list</a></p>
 </body>
 
 </html>

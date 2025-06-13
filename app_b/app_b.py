@@ -6,7 +6,7 @@ import requests
 
 app = Flask(__name__)
 FILES_DIR = "files"
-MIRROR_URL = "http://0.0.0.0:5000"  # Reverse this in app_b
+MIRROR_URL = "http://0.0.0.0:5000"
 PYRO_URI = "PYRO:docmanager@0.0.0.0:9090"
 
 if not os.path.exists(FILES_DIR):
@@ -103,4 +103,4 @@ def mirror_delete(filename):
 
 
 if __name__ == "__main__":
-    app.run(port=5001, host="0.0.0.0")  # Change to 5001 for app_b
+    app.run(port=5001, host="0.0.0.0")

@@ -6,7 +6,7 @@
 
 - `python3 -m venv venv`
 
-- `source venv/bin/activate` no Linux, `.\.venv\Scripts\activate` no Windows
+- `source venv/bin/activate` no Linux, `. .\venv\Scripts\activate` no Windows
 
 - `pip install -r requirements.txt`
 

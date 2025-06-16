@@ -2,19 +2,19 @@
 
 - Python 3
 
-# Como rodar
+# Como rodar - entre no diretorio do projeto e:
 
 - `python3 -m venv venv`
 
-- `source venv/bin/activate` no Linux, `. .\venv\Scripts\activate` no Windows
+- Ative o ambiente virtual com `source venv/bin/activate` no Linux, `. .\venv\Scripts\activate` no Windows
 
 - `pip install -r requirements.txt`
 
 - `python3 ownership_server.py`
 
-- Em outro terminal: `python3 ./app_a/app_a.py`
+- Em outro terminal: Ative o ambiente virtual e rode `python3 ./app_a/app_a.py`
 
-- Em outro terminal: `python3 ./app_b/app_b.py`
+- Em outro terminal: Ative o ambiente virtual e rode `python3 ./app_b/app_b.py`
 
 - Abrir `localhost:5000` no navegador para acessar o primeiro servidor, com arquivos espelhados para o servidor acessivel em `localhost:5001` e vice-versa
 

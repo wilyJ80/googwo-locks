@@ -2,36 +2,46 @@
 <html>
 
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>File Not Found</title>
-	<style>
-		body {
-			font-family: sans-serif;
-			max-width: 600px;
-			margin: auto;
-			text-align: center;
-			padding-top: 50px;
-		}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>File Not Found</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    <style>
+        body {
+            text-align: center;
+            padding-top: 80px; /* Mais padding para centralizar visualmente */
+            /* Outros estilos do body já vêm do mystyle.css */
+        }
 
-		.message {
-			color: #d00;
-			font-size: 1.2em;
-			margin-bottom: 20px;
-		}
+        .message {
+            margin-bottom: 30px; /* Mais espaçamento abaixo da mensagem */
+            color: #d00; /* Mantenho o vermelho para erro */
+        }
 
-		a {
-			text-decoration: none;
-			color: blue;
-		}
-	</style>
+        .message h1 {
+            color: #333; /* Cor do título da mensagem */
+            border-bottom: none; /* Remove a linha do H1 padrão */
+            padding-bottom: 0;
+            margin-bottom: 15px;
+        }
+
+        .message p {
+            color: #555; /* Cor para o parágrafo da mensagem */
+            font-size: 1.1em;
+        }
+
+        a {
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-	<div class="message">
-		<h1>404: File Not Found</h1>
-		<p>The file you tried to access does not exist.</p>
-	</div>
-	<a href="/">Back to index</a>
+    <div class="message">
+        <h1>404: File Not Found</h1>
+        <p>The file you tried to access does not exist.</p>
+    </div>
+    <a href="/">Back to index</a>
 </body>
 
 </html>

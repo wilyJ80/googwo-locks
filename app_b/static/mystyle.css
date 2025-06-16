@@ -1,0 +1,154 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte mais moderna e legível */
+    max-width: 700px; /* Aumentei um pouco a largura máxima para mais espaço */
+    margin: 40px auto; /* Aumentei o espaçamento superior e inferior para mais "respiro" */
+    color: #333; /* Cor de texto padrão: cinza escuro para contraste suave */
+    line-height: 1.6; /* Aumentei a altura da linha para melhor legibilidade */
+}
+
+h1 {
+    font-size: 2.5em; /* Título maior e mais impactante */
+    color: #1a1a1a; /* Preto quase puro para destaque */
+    margin-bottom: 25px; /* Espaçamento abaixo do título */
+    border-bottom: 1px solid #eee; /* Linha sutil para separar o título */
+    padding-bottom: 10px;
+}
+
+textarea {
+    width: 100%;
+    height: 350px; /* Aumentei um pouco a altura para a área de edição */
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace; /* Fontes monoespaçadas mais modernas */
+    margin-bottom: 15px; /* Mais espaçamento abaixo do textarea */
+    padding: 10px; /* Preenchimento interno para o texto não colar nas bordas */
+    border: 1px solid #ccc; /* Borda cinza clara */
+    border-radius: 5px; /* Bordas levemente arredondadas */
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura/altura */
+    resize: vertical; /* Permite redimensionar apenas verticalmente */
+}
+
+button {
+    /* Estilo base para todos os botões */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Verde padrão para botões de ação positiva */
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição suave para hover */
+    margin-right: 10px; /* Espaçamento entre os botões */
+    margin-top: 5px; /* Pequeno espaçamento superior para separar do textarea */
+}
+
+button:hover {
+    background-color: #45a049; /* Escurece no hover */
+}
+
+/* Estilos específicos para botões de formulário */
+form button {
+    margin-left: 0; /* Remove o margin-left que estava causando espaçamento indesejado */
+}
+
+/* Ajuste para o botão delete */
+button[value="delete"] {
+    background-color: #f44336; /* Vermelho para ações de exclusão */
+}
+
+button[value="delete"]:hover {
+    background-color: #da190b;
+}
+
+.message {
+    color: #d00; /* Vermelho para mensagens de erro */
+    font-size: 1.2em;
+    font-weight: bold; /* Deixei a mensagem mais forte */
+    margin-bottom: 30px; /* Mais espaçamento abaixo da mensagem */
+}
+
+a {
+    text-decoration: none;
+    color: #007bff; /* Azul padrão para links, pode ser ajustado para um cinza mais escuro se preferir */
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3; /* Azul mais escuro no hover */
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: #f8f8f8; /* Fundo cinza bem claro */
+    padding: 15px;
+    border: 1px solid #e0e0e0; /* Borda cinza clara */
+    border-radius: 5px;
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace; /* Mesma fonte do textarea */
+    color: #333;
+    overflow-x: auto; /* Adiciona scroll horizontal se o conteúdo for muito largo */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px; /* Espaçamento superior para a lista de arquivos */
+}
+
+li {
+    background-color: #fcfcfc; /* Fundo sutil para cada item da lista */
+    border: 1px solid #eee; /* Borda clara */
+    border-radius: 5px;
+    padding: 12px 15px;
+    margin-bottom: 10px; /* Espaçamento entre os itens da lista */
+    display: flex; /* Para alinhar os elementos dentro do li */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: space-between; /* Espaça o conteúdo */
+}
+
+li form {
+    display: inline-block; /* Mantém os formulários dos botões na mesma linha */
+    margin-left: 5px; /* Espaçamento entre o texto e os botões */
+}
+
+li button {
+    padding: 8px 15px; /* Botões menores dentro da lista */
+    font-size: 0.9em;
+    background-color: #6c757d; /* Cinza para botões secundários */
+}
+
+li button:hover {
+    background-color: #5a6268;
+}
+
+.owner {
+    font-size: 0.85em; /* Um pouco menor */
+    color: #666; /* Cinza médio */
+    margin-left: 10px;
+    font-style: italic; /* Itálico para o nome do proprietário */
+}
+
+/* Estilos para o input de novo arquivo */
+form input[name="filename"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-right: 10px;
+    width: 200px; /* Largura fixa para o input de nome de arquivo */
+}
+
+/* Estilo para o botão "Create" */
+form button[type="submit"] {
+    background-color: #28a745; /* Um tom de verde para criar */
+}
+
+form button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Pequeno ajuste para a linha do Refresh */
+body > a { /* Seleciona apenas o link direto no body (Refresh) */
+    display: block; /* Garante que ele ocupe sua própria linha */
+    margin-bottom: 20px; /* Espaçamento abaixo do Refresh */
+    text-align: center;
+}

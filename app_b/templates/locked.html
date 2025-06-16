@@ -2,38 +2,48 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Locked</title>
-	<style>
-		body {
-			font-family: sans-serif;
-			max-width: 600px;
-			margin: auto;
-			text-align: center;
-		}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Locked</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    <style>
+        body {
+            text-align: center;
+            /* Outros estilos do body já virão do mystyle.css */
+        }
 
-		.locked-msg {
-			margin-top: 50px;
-			color: red;
-			font-size: 1.2em;
-		}
+        .message {
+            margin-top: 80px; /* Aumentei a margem superior para centralizar melhor */
+            color: #cc0000; /* Vermelho mais forte para o alerta */
+        }
 
-		a {
-			display: inline-block;
-			margin-top: 20px;
-			text-decoration: none;
-			color: blue;
-		}
-	</style>
+        .message h1 {
+            color: #333; /* Cor do título da mensagem */
+            border-bottom: none; /* Remove a linha do H1 padrão */
+            padding-bottom: 0;
+            margin-bottom: 15px;
+        }
+
+        .message p {
+            color: #555; /* Cor para o parágrafo da mensagem */
+            font-size: 1.1em;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 30px; /* Mais espaçamento para o link */
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-	<div class="locked-msg">
-		<h1>File is claimed right now</h1>
-		<p>Another user currently holds the edit lock.</p>
-		<a href="/">Back to index</a>
-	</div>
+    <div class="message">
+        <h1>File is claimed right now</h1>
+        <p>Another user currently holds the edit lock.</p>
+        <a href="/">Back to index</a>
+    </div>
 </body>
 
 </html>

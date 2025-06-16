@@ -2,63 +2,41 @@
 <html>
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DocList</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      max-width: 600px;
-      margin: auto;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    li {
-      margin: 8px 0;
-    }
-
-    button {
-      margin-left: 4px;
-    }
-
-    .owner {
-      font-size: 0.9em;
-      color: #555;
-      margin-left: 8px;
-    }
-  </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DocList</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
 </head>
 
 <body>
-  <h1>Files</h1>
+    <h1>Files</h1>
 
-  <a href="/">Refresh</a>
+    <a href="/">Refresh</a>
 
-  <form action="/create" method="post">
-    <input name="filename" placeholder="new file name" required />
-    <button type="submit">Create</button>
-  </form>
+    <form action="/create" method="post" style="margin-bottom: 30px; display: flex; align-items: center;">
+        <input name="filename" placeholder="new file name" required />
+        <button type="submit">Create</button>
+    </form>
 
-  <ul>
-    {% for f in files %}
-      <li>
-        {{ f }}
-        {% if states[f] %}
-          <span class="owner">(Owner: {{ states[f] }})</span>
-        {% endif %}
-        —
-        <form action="/edit/{{ f }}" method="get" style="display:inline">
-          <button>Edit</button>
-        </form>
-        <form action="/view/{{ f }}" method="get" style="display:inline">
-          <button>View</button>
-        </form>
-      </li>
-    {% endfor %}
-  </ul>
+    <ul>
+        {% for f in files %}
+        <li>
+            {{ f }}
+            {% if states[f] %}
+            <span class="owner">(Owner: {{ states[f] }})</span>
+            {% endif %}
+            —
+            <div style="margin-left: auto;">
+                <form action="/edit/{{ f }}" method="get" style="display:inline; margin-right: 5px;">
+                    <button>Edit</button>
+                </form>
+                <form action="/view/{{ f }}" method="get" style="display:inline;">
+                    <button>View</button>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
 </body>
 
 </html>
